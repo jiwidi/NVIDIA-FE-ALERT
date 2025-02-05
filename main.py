@@ -7,8 +7,9 @@ from playwright.sync_api import sync_playwright
 import ua_generator
 import logging
 
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 if not BOT_TOKEN:
     logger.error("BOT_TOKEN environment variable not set")
@@ -27,7 +28,7 @@ gpu_cards = [
     {"name": "4070S", "api_url": "https://api.store.nvidia.com/partner/v1/feinventory?skus=NVGFT470S"}
 ]
 
-locales = ["sv-se", "en-us"]
+locales = ["sv-se", "es-es"]
 last_status = {card["name"]: False for card in gpu_cards}
 
 def send_telegram_message(message, chat_id):
