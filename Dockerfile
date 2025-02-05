@@ -17,4 +17,4 @@ COPY . /app
 ENV PYTHONUNBUFFERED=1
 
 # Run Python under Xvfb
-ENTRYPOINT ["xvfb-run", "--server-args=-screen 0 1024x768x24", "python", "-u", "main.py"]
+CMD ["xvfb-run", "--server-args=-screen 0 1024x768x24", "python", "-u", "main.py"]
