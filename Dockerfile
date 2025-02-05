@@ -1,9 +1,6 @@
 # Use a Playwright image matching your project's version
 FROM mcr.microsoft.com/playwright/python:v1.49.1-jammy
 
-ARG BOT_TOKEN
-ENV BOT_TOKEN=$BOT_TOKEN
-
 # Install Xvfb for a virtual display
 RUN apt-get update && apt-get install -y xvfb
 
