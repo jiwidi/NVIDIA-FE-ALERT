@@ -71,7 +71,7 @@ def check_cards(context):
 def main():
     send_telegram_message("Bot started", DEBUG_CHANNEL_ID)
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, args=["--disable-blink-features=AutomationControlled"])
+        browser = p.chromium.launch(headless=False, args=["--disable-blink-features=AutomationControlled"])
         try:
             while True:
                 context = browser.new_context(
