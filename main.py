@@ -38,7 +38,6 @@ def send_telegram_message(message, chat_id):
     if not r.ok:
         logger.error(f"Failed to send message to Telegram: {r.text}")
 
-
 def fetch_json_in_browser(context, url):
     with context.new_page() as page:
         response = page.goto(url, wait_until="networkidle")
@@ -72,7 +71,7 @@ def check_cards(context):
 def main():
     send_telegram_message("Bot started", DEBUG_CHANNEL_ID)
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, args=["--disable-blink-features=AutomationControlled"])
+        browser = p.chromium.launch(headless=True, args=["--disable-blink-features=AutomationControlled"])
         try:
             while True:
                 context = browser.new_context(
@@ -83,6 +82,8 @@ def main():
                     check_cards(context)
                 except Exception as e:
                     send_telegram_message(f"Error in check loop: {str(e)}\n{traceback.format_exc()}", DEBUG_CHANNEL_ID)
+                finally:
+                    context.close()
                 time.sleep(60)
         except KeyboardInterrupt:
             send_telegram_message("Bot stopped by user", DEBUG_CHANNEL_ID)
